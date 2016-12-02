@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>index.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+index.js</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">/** 
+ * Created by Rushdi on 2016-11-28. 
+ */</span><span class="s1"> 
+</span><span class="s2">var </span><span class="s1">PORT = </span><span class="s3">33333</span><span class="s1">; 
+</span><span class="s2">var </span><span class="s1">HOST = </span><span class="s4">'127.0.0.1'</span><span class="s1">; 
+ 
+</span><span class="s2">var </span><span class="s1">dgram = require(</span><span class="s4">'dgram'</span><span class="s1">); 
+</span><span class="s2">var </span><span class="s1">server = dgram.createSocket(</span><span class="s4">'udp4'</span><span class="s1">); 
+ 
+server.on(</span><span class="s4">'listening'</span><span class="s1">, </span><span class="s2">function </span><span class="s1">() { 
+    </span><span class="s2">var </span><span class="s1">address = server.address(); 
+    console.log(</span><span class="s4">'UDP Server listening on ' </span><span class="s1">+ address.address + </span><span class="s4">&quot;:&quot; </span><span class="s1">+ address.port); 
+}); 
+ 
+server.on(</span><span class="s4">'message'</span><span class="s1">, </span><span class="s2">function </span><span class="s1">(message, remote) { 
+    </span><span class="s2">if</span><span class="s1">(message == </span><span class="s4">'Test Package'</span><span class="s1">) { 
+        </span><span class="s2">var </span><span class="s1">messagereply = </span><span class="s2">new </span><span class="s1">Buffer(</span><span class="s4">'Test Reply'</span><span class="s1">); 
+        server.send(messagereply, </span><span class="s3">0</span><span class="s1">, message.length, remote.port, remote.address, </span><span class="s2">function </span><span class="s1">(err, bytes) { 
+            </span><span class="s2">if </span><span class="s1">(err) </span><span class="s2">throw </span><span class="s1">err; 
+            console.log(</span><span class="s4">'UDP message sent to ' </span><span class="s1">+ remote.address + </span><span class="s4">':' </span><span class="s1">+ remote.port); 
+        }); 
+    } 
+    </span><span class="s2">else </span><span class="s1">{ 
+        </span><span class="s2">return</span><span class="s1">; 
+    } 
+}); 
+ 
+server.bind(PORT, HOST);</span></pre>
+</body>
+</html>
