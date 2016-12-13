@@ -15,7 +15,7 @@ var common_conf = {
     environment: environment,
     max_player: 1024,
     data_paths: {
-        maps: __dirname + "\\Game Data\\" + "Maps\\"
+        maps: __dirname + "\\GameData\\" + "Maps\\"
     },
     starting_zone: "first_map_start"
 };
